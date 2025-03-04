@@ -52,3 +52,6 @@ bank["income"] = pd.qcut(bank["income"],q=3,labels=["L","M","H"])
 
 #轉換資料型態
 bank["children"] = bank["children"].astype(str)
+
+
+bank.to_csv("411422259.csv",index=False)
