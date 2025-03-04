@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Tue Mar  4 11:46:53 2025
 
@@ -23,6 +22,14 @@ data["Age"] = np.where(data["Age"].isnull(),
 #離散化
 print(np.min(data["Age"])," , ",np.max(data["Age"]))
 #print(pd.cut(data["Age"],bins=5).value_counts())
-#data["Age"] = pd.cut(data["Age"],bins=3,labels=["0-16","17-32","33-48"])
+data["Age"] = pd.cut(data["Age"],bins=5,labels=["0-16","17-32","33-48","49-64","64-80"])
+
+#print(pd.qcut(data["Fare"],q=3,labels=["L","M","H"]).value_counts())
+data["Fare"] = pd.qcut(data["Fare"],q=3,labels=["L","M","H"])
+
+#轉換資料型態
+data["SibSp"] = data["SibSp"].astype(str)
 
 data.info()
+
+data.to_csv("411422259.csv",index=False)
