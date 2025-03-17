@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
 """
+# -*- coding: utf-8 -*
+
 Created on Tue Mar  4 09:55:53 2025
 
 @author: 411422259 蕭羽芳
