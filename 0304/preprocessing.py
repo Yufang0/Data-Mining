@@ -44,8 +44,8 @@ bank["married"] = np.where(bank["married"].isnull(),
 
 #最小值，最大值
 print(np.min(bank["age"])," , ",np.max(bank["age"]))
-#print(pd.cut(bank["age"],bins=3,labels=["18-34","35-50","51-67"]).value_counts())
-bank["age"] = pd.cut(bank["age"],bins=3,labels=["18-34","35-50","51-67"])
+print(pd.cut(bank["age"],bins=3).value_counts())
+#bank["age"] = pd.cut(bank["age"],bins=3,labels=["18-34","35-50","51-67"])
 
 #等次數切
 print(pd.qcut(bank["income"],q=3,labels=["L","M","H"]).value_counts())

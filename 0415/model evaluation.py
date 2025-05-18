@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 15 10:27:16 2025
+Spyder Editor
 
-@author: 411422259
+This is a temporary script file.
+411422170吳沂珊
+20250415
+topic:Model evaluation
 """
-
 import pandas as pd
-zoo = pd.read_csv("zoo.csv")
-zoo = zoo.drop(columns=["animal name"])
-X = zoo.drop(columns=['type'])
-y = zoo['type']
+zoo=pd.read_csv("zoo.csv")
+zoo=zoo.drop(columns=["animal name"]) #drop多行的話可以逗點
+X=zoo.drop(columns=["type"])          #把目標變數拿掉命名為X
+y=zoo["type"]                         # type 命為y
 
 #樂觀法則 (正確率 M1
 from sklearn.tree import DecisionTreeClassifier

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 15 10:27:16 2025
+Created on Tue Apr 22 01:45:02 2025
 
-@author: 411422259
+@author: 411422259 蕭羽芳
 """
 
 import pandas as pd
 zoo = pd.read_csv("zoo.csv")
 zoo = zoo.drop(columns=["animal name"])
-X = zoo.drop(columns=['type'])
+X = zoo.drop(columns=['type','legs','eggs'])
 y = zoo['type']
 
 #樂觀法則 (正確率 M1
@@ -36,18 +36,19 @@ print("pessimistic accuracy=",1-(6+7*0.5)/101)
 
 #hold-out 比例分割 M3
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test=train_test_split(X,y,test_size=0.3,
+X_train, X_test, y_train, y_test=train_test_split(X,y,test_size=0.2,
                                                   random_state=20250415)
 
 clf.fit(X_train,y_train)
-print("Hold-out 7:3 =",clf.score(X_test, y_test))
+print("Hold-out 8:2 =",clf.score(X_test, y_test))
 
 
 #交叉驗證 資料一定是全部
 from sklearn.model_selection import cross_val_score
-scores=cross_val_score(clf,X,y,cv=5, scoring="accuracy")#一定適用全部資料
+scores=cross_val_score(clf,X,y,cv=8, scoring="accuracy")#一定適用全部資料
 print("5-cross validation=", scores)
 print("5-cross validation=", scores.mean()) #要取平均
+
 
 
 
