@@ -9,6 +9,7 @@ Topic: KNN
 import pandas as pd
 
 bank = pd.read_csv("bank-data(3).csv")
+bank.info()
 
 #實際三種不同類型以上才要用one hot encoder
 
