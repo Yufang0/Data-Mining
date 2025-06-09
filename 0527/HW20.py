@@ -1,49 +1,33 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 27 10:23:05 2025
+Created on Mon Jun  2 17:19:02 2025
 
-@author: 411422259
-@topic: Voting
+@author: 411422259 HW20
 """
 
 import pandas as pd
-bank=pd.read_csv("bank-data(3).csv")
-#X = bank[["age","income"]]
-#y = bank[["pep"]]
+train = pd.read_csv('titanic-train(1)_20.csv')
+test = pd.read_csv('#5-titanic-test.csv')
 
-from sklearn.preprocessing import LabelEncoder
-le=LabelEncoder()
-sex=le.fit_transform(bank["sex"])
-married=le.fit_transform(bank["married"])
-car=le.fit_transform(bank["car"])
-children=le.fit_transform(bank["children"])
-save=le.fit_transform(bank["save_act"])
-current=le.fit_transform(bank["current_act"])
-mortgage=le.fit_transform(bank["mortgage"])
+import numpy as np
+train["Age"] = np.where(train["Age"].isnull(),
+                       np.nanmedian(train["Age"]),train["Age"])
 
-from sklearn.preprocessing import OneHotEncoder
-ohe = OneHotEncoder(sparse_output=False)
-region = pd.DataFrame(ohe.fit_transform(bank[["region"]]))
-region.columns = ohe.categories_[0]
+test["Age"] = np.where(test["Age"].isnull(),
+                       np.nanmedian(test["Age"]),test["Age"])
 
-X = pd.DataFrame([bank['age'], sex, bank["income"], married, children, car, save, current, mortgage]).T
-X.columns = ["age","sex","income","married","children","car","save","current","mortgage"]
+#多個資料表，縱向合併axis=1
+X_train = pd.DataFrame([train["Age"], train["Fare"]]).T
+y_train = train['Survived']
 
-X = pd.concat([X,region],axis = 1)
-y = bank["pep"]
+X_test = pd.DataFrame([test["Age"], test["Fare"]]).T
+y_test = test['Survived']
 
-#因為SVM一定要轉編碼，所以大家配合
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
-y = le.fit_transform(y)
+y_train = le.fit_transform(y_train)
+y_test = le.fit_transform(y_test)
 
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2,random_state=20250527)
-
-#如果有標準化的話，一定要先切資料集，模擬測試是外來的資料集，必須要配合訓練資料transform
-#所以X_test，不可以自己fit標準化，只能transorm X_train的平均數和標準差
-
-#KNN、SVC(可作可不做)、RF/DT(不用)，但要比較所以都做
 from sklearn.preprocessing import StandardScaler
 ss = StandardScaler()
 std_X_train = ss.fit_transform(X_train)

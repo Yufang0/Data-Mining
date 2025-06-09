@@ -31,6 +31,7 @@ ss = StandardScaler()
 
 X_train_std = ss.fit_transform(X_train)
 
+
 from sklearn.svm import LinearSVC
 
 m = LinearSVC(C=0.1, dual=False, class_weight="balanced")

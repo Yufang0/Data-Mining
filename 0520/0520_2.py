@@ -53,7 +53,7 @@ ss = StandardScaler()
 #age = ss.fit_transform(bank[["age"]])
 ss.fit(bank[["age"]])
 age = pd.DataFrame(ss.transform(bank[["age"]]))
-age .columns = ['age']
+age.columns = ['age']
 
 income = pd.DataFrame(ss.fit_transform(bank[["income"]]))
 income.columns = ['income']
@@ -90,7 +90,7 @@ bestK = 0
 for i in range(0,480):
     if acc[i] == max(acc):
         bestK = i+1
-        break
+        
 
     
 print("最佳的 k =", bestK, "測試資料集正確率 =",max(acc))

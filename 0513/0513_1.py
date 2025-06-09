@@ -10,6 +10,7 @@ import pandas as pd
 
 df = pd.read_csv('Retail.csv')
 
+#格式都變一樣，讓空格不被當作項目
 df['Description'] = df['Description'].str.strip()
 
 df.dropna(axis=0,subset=["InvoiceNo"],inplace=True)
@@ -22,7 +23,7 @@ df = df[~df["InvoiceNo"].str.contains("C")]
 
 
 #可以取出某一個欄位的值合併 Ex:Country欄位=France
-#groupby()使用了發票編號和產品名稱合併，並且把數量加總
+#groupby()使用了發票編號和產品名稱合併，並且把商品數量加總
 #unstack()可以把發票編號變成row, 產品名稱變成column
 #reset_index().fillna(0) 是指把資料原本是nan的改成0填入
 #set_index("InvoiceNo) 是指原本有多一個欄位index, 這個指令可以用發票編號取代為index
